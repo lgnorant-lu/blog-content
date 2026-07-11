@@ -1,0 +1,97 @@
+# 站点配置
+# 
+# 本文件是博客站点的主配置文件，包含站点信息、多源订阅、
+# AI、安全等配置。本机和服务器的配置可以不同（如服务器
+# 需要配置 SSH 密钥，本机不需要）。
+
+site:
+  title: "你的博客名"
+  description: "博客描述"
+  author: "lgnorant-lu"
+  url: "https://blog.example.com"
+  giscus_repo: "lgnorant-lu/blog-comments"
+
+# 内容目录配置
+content:
+  posts_dir: "posts"        # 已发布文章目录
+  drafts_dir: "drafts"      # 草稿目录（本机可见）
+  pages_dir: "pages"        # 静态页面目录
+  external_dir: "external"  # 外部源缓存（.gitignore）
+
+# 多源订阅
+sources:
+  # 主源：本地 Markdown（自动扫描，不需要配置）
+
+  # 副源：RSS 订阅
+  # - id: "friend-1"
+  #   name: "朋友A的博客"
+  #   type: rss
+  #   url: "https://example.com/rss.xml"
+  #   fetch_full_content: true
+  #   poll_interval: 15m
+  #   display: secondary  # primary（混入主时间线）/ secondary（独立栏目）
+
+  # 副源：GitHub Issues（可作为微博客）
+  # - id: "micro"
+  #   name: "碎碎念"
+  #   type: github-issues
+  #   repo: "lgnorant-lu/micro-blog"
+  #   poll_interval: 5m
+  #   display: primary
+
+# SSH 服务配置（仅服务器模式使用）
+ssh:
+  port: 2222
+  host: "0.0.0.0"
+  auth: "publickey"         # publickey / open
+  authorized_keys: ""       # authorized_keys 文件路径
+  max_sessions: 50          # 最大并发会话
+  session_timeout: 30m      # 空闲超时
+  banner: "Welcome to blog-tui"
+
+# 安全配置
+security:
+  fail2ban:
+    enabled: true
+    max_attempts: 5         # 最大失败次数
+    ban_duration: 1h        # 封禁时长
+  rate_limit:
+    enabled: true
+    per_ip: 10              # 每分钟每 IP 连接数
+    global: 100             # 每分钟全局连接数
+  whitelist_cidrs: []       # CIDR 白名单（跳过限制）
+
+# AI 配置（可选，延后实施）
+ai:
+  enabled: false
+  provider: "openai"        # openai / anthropic / ollama / ...
+  model: "gpt-4o-mini"
+  api_key: ""               # 从环境变量读取：OPENAI_API_KEY
+  base_url: ""              # 自定义 API 端点（可选）
+  max_tokens_per_session: 10000
+  max_tokens_per_day: 100000
+  system_prompt: ""         # 自定义 AI 人设
+
+# HTTP 服务配置（RSS + llms.txt）
+http:
+  enabled: false
+  port: 8080
+  rss_path: "/feed.xml"
+  llms_txt_path: "/llms.txt"
+  llms_full_path: "/llms-full.txt"
+  sitemap_path: "/sitemap.xml"
+  health_path: "/health"
+
+# 同步配置
+sync:
+  git:
+    auto_pull: true         # webhook/cron 触发自动 pull
+    webhook_secret: ""      # GitHub webhook HMAC 密钥
+    cron_interval: 5m       # 兜底轮询间隔
+  fsnotify:
+    debounce: 500ms         # 文件变化去抖动
+
+# 日志配置
+log:
+  level: "info"             # debug / info / warn / error
+  format: "text"            # text / json
