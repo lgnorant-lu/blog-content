@@ -1,11 +1,16 @@
 ---
 title: "Hello World"
 date: 2026-07-09
+updated: "2026-07-14"
+author: "lgnorant-lu"
 tags: ["test", "hello"]
 categories: ["随笔"]
+keywords: "hello world, blog-tui smoke test"
+series: "blog-tui series"
 draft: false
 slug: "hello-world"
-summary: "第一篇测试文章"
+summary: "第一篇测试文章，也作为 blog-tui series 的序章。"
+weight: 0
 ---
 
 > 测试文章 | 2026-07-09 | 原创
@@ -20,7 +25,7 @@ summary: "第一篇测试文章"
 
 ## 开篇
 
-你好，世界！这是 blog-tui 的第一篇测试文章。
+你好，世界！这是 blog-tui 的第一篇测试文章，现已归入 `blog-tui series`，可用键 `5` 进入系列导航。
 
 ## 功能测试
 
