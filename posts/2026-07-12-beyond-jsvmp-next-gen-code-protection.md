@@ -1,13 +1,13 @@
 ---
 title: "超越 JSVMP：Web 端代码保护的 6 个研究方向"
 date: 2026-07-12
-updated: "2026-07-14"
+updated: "2026-07-16"
 author: "lgnorant-lu"
 tags: ["obfuscation", "cryptography", "quantum", "topology", "zero-knowledge", "lattice", "information-theory", "wasm"]
 categories: ["安全研究"]
 keywords: "代码保护, JSVMP, 量子电路混淆, 拓扑保护, OTP 密钥流, 不可区分混淆, LWE, ZK-WASM, Local-Mixing, 辫群, Reidemeister, Shannon, PRF, Fiat-Shamir"
 series: "MReverse"
-draft: true
+draft: false
 slug: "beyond-jsvmp-next-gen-code-protection"
 summary: "对照本地 MReverse 原型，梳理 6 条超越传统 JSVMP/WASM 平坦化思路的研究路径。强调安全模型边界与攻击示意分口径，非生产方案清单。"
 cover: ""
