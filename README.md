@@ -1,42 +1,40 @@
 # blog-content
 
-Private content repository for [blog-tui](https://github.com/lgnorant-lu/blog-tui).
+> 博客内容仓库（Markdown 源文件）。  
+> 由 blog-tui（SSH TUI 阅读器）和 blog-web（Web 壳）共用。
 
-## Layout
+## 目录结构
 
 ```
-posts/       published articles (YYYY-MM-DD-slug.md)
-drafts/      work in progress (not shown as published)
-pages/       static pages (about, etc.)
-templates/   post templates (not scanned by the engine)
-config.yaml  site configuration
-AGENTS.md    writing rules for agents and humans
+posts/      已发布的文章（Markdown + Frontmatter）
+drafts/     草稿（不发布）
+pages/      静态页面（关于、项目等）
+templates/  文章模板
+config.yaml  站点配置（标题、描述、giscus 仓库等）
 ```
 
-## Local development
+## 文章 Frontmatter
 
-Clone next to the engine as `content/`:
+每篇 `.md` 文件以 YAML frontmatter 开头：
 
-```bash
-git clone git@github.com:lgnorant-lu/blog-tui.git
-git clone git@github.com:lgnorant-lu/blog-content.git blog-tui/content
-cd blog-tui
-make run
+```yaml
+---
+title: 文章标题
+date: 2026-07-01
+slug: optional-custom-slug
+tags: [tag1, tag2]
+series: series-name  # 可选：所属系列
+summary: 文章摘要，约 1-2 句
+draft: true          # 可选：标记为草稿
+---
 ```
 
-## Writing
+## 发布流程
 
-1. Copy `templates/post-template.md` or use engine `make new-post SLUG=...`
-2. Edit under `drafts/` until ready
-3. Move to `posts/`, set `draft: false`, ensure TOC section exists
-4. Push to `main` — server webhook pulls and rebuilds the index
+1. 在 `drafts/` 写作
+2. 准备就绪后移至 `posts/`
+3. `git push` → Webhook 自动触发重建
 
-See [AGENTS.md](AGENTS.md) for frontmatter and Markdown rules.
+## 协议
 
-## CI
-
-Push / PR runs TOC presence check only (no Go build).
-
-## Line endings
-
-`.gitattributes` forces LF for Markdown and YAML (Windows-safe).
+文章采用 CC BY-NC 4.0，代码片段采用 MIT。
